@@ -1,6 +1,10 @@
 {
     "commands": [
         {
+            "name":"invite",
+            "description":"Запрос на вступление"
+        },
+        {
             "name":"docs",
             "description":"Показать документы"
         },

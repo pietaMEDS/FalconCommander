@@ -23,6 +23,7 @@ import workoutSend from './commands/raportSend/workout.js';
 import SimulationSend from './commands/raportSend/simulation.js';
 import PostSend from './commands/raportSend/post.js';
 import EventSend from './commands/raportSend/event.js';
+import DocSend from './commands/doc.js';
 
 client.on('ready', () => {
   console.log(`Вход выполнен как ${client.user.tag}!`);
@@ -30,38 +31,19 @@ client.on('ready', () => {
 
 client.on('interactionCreate', async interaction => {
   try{
-//   if (interaction.isChatInputCommand()) return;
+  if (interaction.member.nick) {
+    interaction.reply({content:"Я не работаю на серверах этого типа!", ephemeral: true})
+    return;
+  }
+
   let message;
 
   switch (interaction.commandName) {
-    case 'connect':
-      let DocID;
-      try {
-        interaction.options._hoistedOptions.forEach(element => {
-          if (element.name == 'sheet-id') {
-            console.log(`Founded value: ${element.value}`);
-            DocID = element.value;
-          }
-        });
-        const jwt = new JWT({
-          email: creds.client_email,
-          key: creds.private_key,
-          scopes: SCOPES,
-        });
-        const doc = new GoogleSpreadsheet(DocID, jwt);
-  
-        await doc.loadInfo();
-        console.log(doc.title);
-        message = `${doc.title} sheet loaded!`;
-        interaction.reply({content:message, fetchReply:true})
-        .then((message) => console.log(`Send "${message}" to ${interaction.member.displayName} on Guild:[${interaction.guildId}] Channel:[${interaction.channelId}]`))
-        .catch(console.error);
-      } catch (error) {
-        interaction.reply("Something went wrong.");
-        console.log(error);
-      }
-      break;
+    case "docs":
 
+    let DocModal = new ModalBuilder()
+      DocSend(interaction);
+    break;
     case 'reload':
       try {
         console.log('Обновление слеш комманд..');
@@ -77,6 +59,13 @@ client.on('interactionCreate', async interaction => {
 
       await interaction.reply("Slash reloaded!")
     break;
+  case "invite":
+    if (interaction.member.nickname.split(" ") != 3) {
+      interaction.reply({content: `Измените своё имя по шаблону: [Звание] [Номер] [Позывной]
+      Пример: SPC 0178 Neiro` })
+    }
+    console.log(interaction.member.nickname);
+
 	case 'raport':
 		let type;
 		let maker;
@@ -106,7 +95,7 @@ client.on('interactionCreate', async interaction => {
       let user;
       interaction.options._hoistedOptions.forEach(async element => {
         if (element.name == 'user') {
-          user = element.member.nick.split("|")
+          user = element.member.nickname.split("|")
           user = user[0].trim().split(" ")
         }
         if (user.length != 4) {

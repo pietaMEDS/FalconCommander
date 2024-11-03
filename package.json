@@ -1,0 +1,30 @@
+{
+  "name": "falconcommander",
+  "version": "0.1.7",
+  "description": "Discord App for Falks 212th",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pietaMEDS/FaclonCommanderDsApp.git"
+  },
+  "author": "pietaMEDS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pietaMEDS/FaclonCommanderDsApp/issues"
+  },
+  "homepage": "https://github.com/pietaMEDS/FaclonCommanderDsApp#readme",
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5",
+    "google-auth-library": "^9.14.2",
+    "google-spreadsheet": "^4.1.4",
+    "u200b": "^0.35.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.13.0"
+  }
+}

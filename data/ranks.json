@@ -1,0 +1,426 @@
+{
+    "ranks":[
+        {
+            "name":"REC",
+            "subnames":["RCT"],
+            "priority":0,
+            "condition":[
+                {
+                    "name":"recruting",
+                    "value":1,
+                    "desc":"Прохождение базового курса подготовки"
+                }
+            ]
+        },
+        {
+            "name":"PVT",
+            "subnames":[],
+            "priority":1,
+            "condition":[
+                {
+                    "name":"wait",
+                    "value":1,
+                    "desc":"Ожидание суток с предыдущего повышения"
+                },
+                {
+                    "name":"event",
+                    "value":1,
+                    "desc":"Участие в боевом вылете"
+                }
+            ]
+        },
+        {
+            "name":"PV2",
+            "subnames":["PVT2", "PSC"],
+            "priority":3,
+            "condition":[
+                {
+                    "name":"wait",
+                    "value":1,
+                    "desc":"Ожидание суток с предыдущего повышения"
+                },
+                {
+                    "name":"event",
+                    "value":2,
+                    "desc":"Участие в боевом вылете"
+                },
+                {
+                    "name":"post",
+                    "value":40,
+                    "desc":"Постовая служба"
+                },
+                {
+                    "name":"simulation",
+                    "value":1,
+                    "desc":"Участие в симуляции"
+                }
+            ]
+        },
+        {
+            "name":"PV1",
+            "subnames":["PVT1", "PFC"],
+            "priority":4,
+            "condition":[
+                {
+                    "name":"wait",
+                    "value":2,
+                    "desc":"Ожидание суток с предыдущего повышения"
+                },
+                {
+                    "name":"event",
+                    "value":2,
+                    "desc":"Участие в боевом вылете"
+                },
+                {
+                    "name":"post",
+                    "value":40,
+                    "desc":"Постовая служба"
+                },
+                {
+                    "name":"simulation",
+                    "value":2,
+                    "desc":"Участие в симуляции"
+                },
+                {
+                    "name":"workout",
+                    "value":1,
+                    "desc":"Участие в тренировке"
+                }
+            ]
+        },
+        {
+            "name":"SPC",
+            "subnames":[],
+            "priority":5,
+            "condition":[
+                {
+                    "name":"wait",
+                    "value":2,
+                    "desc":"Ожидание суток с предыдущего повышения"
+                },
+                {
+                    "name":"event",
+                    "value":3,
+                    "desc":"Участие в боевом вылете"
+                },
+                {
+                    "name":"post",
+                    "value":40,
+                    "desc":"Постовая служба"
+                },
+                {
+                    "name":"charter",
+                    "value":1,
+                    "desc":"Сдача экзамена на знание устава"
+                },
+                {
+                    "name":"recruter",
+                    "value":1,
+                    "desc":"Провести обучение рекрутов"
+                }
+            ]
+        },
+        {
+            "name":"LCPL",
+            "subnames":[],
+            "priority":6,
+            "condition":[
+                {
+                    "name":"wait",
+                    "value":3,
+                    "desc":"Ожидание суток с предыдущего повышения"
+                },
+                {
+                    "name":"event",
+                    "value":2,
+                    "desc":"Участие в боевом вылете"
+                },
+                {
+                    "name":"orgonize:1233859013284991118",
+                    "value":2,
+                    "desc":"Организация тренировок"
+                },
+                {
+                    "name":"orgonize:1233859972274851932",
+                    "value":2,
+                    "desc":"Организация симуляций"
+                },
+                {
+                    "name":"CapturePost",
+                    "value":1,
+                    "desc":"Участие в захвате аванпоста"
+                }
+            ]
+        },
+        {
+            "name":"CPL",
+            "subnames":[],
+            "priority":7,
+            "condition":[
+                {
+                    "name":"wait",
+                    "value":3,
+                    "desc":"Ожидание суток с предыдущего повышения"
+                },
+                {
+                    "name":"event",
+                    "value":3,
+                    "desc":"Участие в боевом вылете"
+                },
+                {
+                    "name":"orgonize:1233859013284991118",
+                    "value":3,
+                    "desc":"Организация тренировок"
+                },
+                {
+                    "name":"orgonize:1233859972274851932",
+                    "value":3,
+                    "desc":"Организация симуляций"
+                },
+                {
+                    "name":"inhertCharter",
+                    "value":1,
+                    "desc":"Прохождение внутреннего экзамена"
+                },
+                {
+                    "name":"orgonize:1233857616413851758",
+                    "value":20,
+                    "desc":"Организация патрульно-постовой службы"
+                }
+            ]
+        },
+        {
+            "name":"SGT",
+            "subnames":[],
+            "priority":8,
+            "condition":[
+                {
+                    "name":"wait",
+                    "value":4,
+                    "desc":"Ожидание суток с предыдущего повышения"
+                },
+                {
+                    "name":"event",
+                    "value":3,
+                    "desc":"Участие в боевом вылете"
+                },
+                {
+                    "name":"orgonize:1233859013284991118",
+                    "value":4,
+                    "desc":"Организация тренировок"
+                },
+                {
+                    "name":"orgonize:CapturePost",
+                    "value":1,
+                    "desc":"Участие в захвате аванпоста"
+                },
+                {
+                    "name":"orgonize:1233859972274851932",
+                    "value":3,
+                    "desc":"Организация симуляций"
+                }
+            ]
+        },
+        {
+            "name":"SFC",
+            "subnames":["SGT1"],
+            "priority":9,
+            "condition":[
+                {
+                    "name":"wait",
+                    "value":4,
+                    "desc":"Ожидание суток с предыдущего повышения"
+                },
+                {
+                    "name":"event",
+                    "value":3,
+                    "desc":"Участие в боевом вылете"
+                },
+                {
+                    "name":"UnitedOrgonize:1233859013284991118",
+                    "value":1,
+                    "desc":"Организация совместной тренировки с другими ЛБК"
+                },
+                {
+                    "name":"orgonize:1233857616413851758",
+                    "value":80,
+                    "desc":"Организация патрульно-постовой службы"
+                },
+                {
+                    "name":"orgonize:1233867252206407823",
+                    "value":2,
+                    "desc":"Организация обучения на специализацию"
+                }
+            ]
+        },
+        {
+            "name":"MSG",
+            "subnames":[],
+            "priority":10,
+            "condition":[
+                {
+                    "name":"wait",
+                    "value":4,
+                    "desc":"Ожидание суток с предыдущего повышения"
+                },
+                {
+                    "name":"orgonize:1233880241152200775",
+                    "value":1,
+                    "desc":"Участие в боевом вылете в качестве командира"
+                },
+                {
+                    "name":"inhertCharter",
+                    "value":1,
+                    "desc":"Прохождение внутреннего экзамена"
+                },
+                {
+                    "name":"orgonize:1233862206521872486",
+                    "value":1,
+                    "desc":"Организация лекции"
+                },
+                {
+                    "name":"orgonize:1233859013284991118",
+                    "value":4,
+                    "desc":"Организация тренировок"
+                },
+                {
+                    "name":"orgonize:Out",
+                    "value":4,
+                    "desc":"Организация выходов за базу"
+                }
+            ]
+        },
+        {
+            "name":"JLT",
+            "subnames":["2LT"],
+            "priority":11,
+            "condition":[
+                {
+                    "name":"wait",
+                    "value":5,
+                    "desc":"Ожидание суток с предыдущего повышения"
+                },
+                {
+                    "name":"recommendation",
+                    "value":3,
+                    "desc":"Получение рекомендаций от других ЛБК"
+                },
+                {
+                    "name":"orgonize:1233880241152200775",
+                    "value":4,
+                    "desc":"Участие в боевом вылете в качестве командира"
+                },
+                {
+                    "name":"UnitedOrgonize:1233859013284991118",
+                    "value":1,
+                    "desc":"Организация совместных тренировок"
+                }
+            ]
+        },
+        {
+            "name":"LT",
+            "subnames":["2LT"],
+            "priority":12,
+            "condition":[
+                {
+                    "name":"wait",
+                    "value":7,
+                    "desc":"Ожидание суток с предыдущего повышения"
+                },
+                {
+                    "name":"recommendation",
+                    "value":3,
+                    "desc":"Получение рекомендаций от других ЛБК"
+                },
+                {
+                    "name":"orgonize:1233880241152200775",
+                    "value":4,
+                    "desc":"Участие в боевом вылете в качестве командира"
+                },
+                {
+                    "name":"orgonize:1233859013284991118",
+                    "value":6,
+                    "desc":"Организация тренировок"
+                },
+                {
+                    "name":"UnitedOrgonize:1233859013284991118",
+                    "value":3,
+                    "desc":"Организация совместных тренировок"
+                }
+                
+            ]
+        },
+        {
+            "name":"SLT",
+            "subnames":[],
+            "priority":13,
+            "condition":[
+                {
+                    "name":"CommanderAllow",
+                    "value":1,
+                    "desc":"Одобрение командира"
+                }
+            ]
+        },
+        {
+            "name":"CPT",
+            "subnames":[],
+            "priority":14,
+            "condition":[
+                {
+                    "name":"CommanderAllow",
+                    "value":1,
+                    "desc":"Одобрение коммандования"
+                }
+            ]
+        },
+        {
+            "name":"MAJ",
+            "subnames":["MAJOR"],
+            "priority":15,
+            "condition":[
+                {
+                    "name":"CommanderAllow",
+                    "value":1,
+                    "desc":"Одобрение коммандования"
+                }
+            ]
+        },
+        {
+            "name":"CO",
+            "subnames":[],
+            "priority":16,
+            "condition":[
+                {
+                    "name":"CommanderAllow",
+                    "value":1,
+                    "desc":"WTF ARE YOU Doing here?"
+                }
+            ]
+        },
+        {
+            "name":"SCO",
+            "subnames":[],
+            "priority":17,
+            "condition":[
+                {
+                    "name":"CommanderAllow",
+                    "value":1,
+                    "desc":"WTF ARE YOU Doing here?"
+                }
+            ]
+        },
+        {
+            "name":"MCO",
+            "subnames":[],
+            "priority":18,
+            "condition":[
+                {
+                    "name":"CommanderAllow",
+                    "value":1,
+                    "desc":"WTF ARE YOU Doing here?"
+                }
+            ]
+        }
+    ]
+}

@@ -35,13 +35,13 @@ export default async (interaction) => {
         )
 
         let confirm = new ButtonBuilder()
-            .setCustomId('confirm:Commander')
+            .setCustomId('confirm:Officer')
 			.setLabel('Одобрить рапорт')
 			.setStyle(ButtonStyle.Success)
             .setEmoji('1233846475805425835');
 
         let cancel = new ButtonBuilder()
-            .setCustomId('cancel:Commander')
+            .setCustomId('cancel:Officer')
 			.setLabel('Отклонить рапорт')
 			.setStyle(ButtonStyle.Danger)
             .setEmoji('1233846477470830654');

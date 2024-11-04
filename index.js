@@ -195,12 +195,12 @@ client.on('interactionCreate', async interaction => {
         .setAuthor({name: interaction.message.embeds[0].data.author.name, iconURL: interaction.message.embeds[0].data.author.icon_url })
         .setFooter({ text:"Одобрено: "+interaction.member.nickname});
         interaction.message.embeds[0].data.fields.forEach( field => {
-          ConfirmEmbed.addFields({name:field.name, value:field.value, inline:field.inline})
+          ConfirmEmbed.addFields({name:field.name == '' ? "\u200B" : field.name, value:field.value == '' ? "\u200B" : field.value, inline:field.inline})
         })
         interaction.update({embeds:[ConfirmEmbed], components: []})       
       }
       else{
-        interaction.reply({content:"Вы не можете одобрять рапорта"})
+        interaction.reply({content:"Вы не можете одобрять рапорта", ephemeral:true})
       }
     break
 

@@ -42,7 +42,7 @@ export default async (interaction) => {
     
     try{
         let replyEmbed = new EmbedBuilder()
-        .setColor("#E55A36")
+        .setColor("#ffffff")
         .setTitle("*Рапорт о проведении обучения*")
         .setAuthor({name: "Организатор: "+interaction.member.nick, iconURL: "https://cdn.discordapp.com/avatars/"+interaction.user.id+"/"+interaction.user.avatar })
         .addFields(

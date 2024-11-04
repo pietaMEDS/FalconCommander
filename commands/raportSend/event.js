@@ -24,14 +24,14 @@ export default async (interaction) => {
 
     try{
         let replyEmbed = new EmbedBuilder()
-        .setColor("#E55A36")
+        .setColor("#ffffff")
         .setTitle("*Рапорт о Боевом вылете*")
         .setAuthor({name: interaction.member.nickname, iconURL: "https://cdn.discordapp.com/avatars/"+interaction.user.id+"/"+interaction.user.avatar })
         .addFields(
-            {name: "Операция: "+interaction.fields.fields.get("operation").value, value: interaction.fields.fields.get("desc").value },
+            { name: "Операция: "+interaction.fields.fields.get("operation").value, value: interaction.fields.fields.get("desc").value },
             { name: '\u200B', value: '\u200B' },
             { name:"Участники", value:activies, inline: true  },
-            {name:"\u200B", value:"Дата: "+ day +"."+month } 
+            { name:"\u200B", value:"Дата: "+ day +"."+month } 
         )
 
         let confirm = new ButtonBuilder()

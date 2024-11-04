@@ -3,7 +3,7 @@ import { env } from 'process';
 // const wait = require('node:timers/promises').setTimeout;
 // import { wait } from "node:timers/promises"
 import { setTimeout } from 'node:timers/promises'
-import { ActionRowBuilder, ModalBuilder, REST, Routes, TextInputBuilder, TextInputStyle  } from 'discord.js';
+import { ActionRowBuilder, EmbedBuilder, ModalBuilder, REST, Routes, TextInputBuilder, TextInputStyle  } from 'discord.js';
 import { Client, GatewayIntentBits } from 'discord.js';
 import { readFile, writeFile } from 'fs/promises';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
@@ -23,6 +23,8 @@ import workoutSend from './commands/raportSend/workout.js';
 import SimulationSend from './commands/raportSend/simulation.js';
 import PostSend from './commands/raportSend/post.js';
 import EventSend from './commands/raportSend/event.js';
+import LectureSend from './commands/raportSend/lecture.js';
+import TrainigSend from './commands/raportSend/training.js';
 import DocSend from './commands/doc.js';
 
 client.on('ready', () => {
@@ -169,6 +171,66 @@ client.on('interactionCreate', async interaction => {
     case "Raport Builder:"+RAPORT_ID.event:
       EventSend(interaction)
     break;
+    case "Raport Builder:"+RAPORT_ID.training:
+      TrainigSend(interaction)
+    break;
+    case "Raport Builder:"+RAPORT_ID.rankUp:
+      EventSend(interaction)
+    break;
+    case "Raport Builder:"+RAPORT_ID.lecture:
+      LectureSend(interaction)
+    break;
+    case "confirm:Officer":
+      if (
+        interaction.member.roles.cache.some(role => role.name === 'Заместитель командира')
+        ||
+        interaction.member.roles.cache.some(role => role.name === 'Командир')
+        ||
+        interaction.member.roles.cache.some(role => role.name === 'Командование')
+      ) {
+
+        let ConfirmEmbed = new EmbedBuilder()
+        .setColor("#E55A36")
+        .setTitle(interaction.message.embeds[0].data.title)
+        .setAuthor({name: interaction.message.embeds[0].data.author.name, iconURL: interaction.message.embeds[0].data.author.icon_url })
+        .setFooter({ text:"Одобрено: "+interaction.member.nickname});
+        interaction.message.embeds[0].data.fields.forEach( field => {
+          ConfirmEmbed.addFields({name:field.name, value:field.value, inline:field.inline})
+        })
+        interaction.update({embeds:[ConfirmEmbed], components: []})       
+      }
+      else{
+        interaction.reply({content:"Вы не можете одобрять рапорта"})
+      }
+    break
+
+    case "cancel:Officer":
+      if (interaction.member.user.id == interaction.message.interaction.user.id) {
+        interaction.message.delete()
+        interaction.reply({content:"Рапорт удалён",embeds:[], components: [], ephemeral:true})
+      }
+      else if (
+        interaction.member.roles.cache.some(role => role.name === 'Заместитель командира')
+        ||
+        interaction.member.roles.cache.some(role => role.name === 'Командир')
+        ||
+        interaction.member.roles.cache.some(role => role.name === 'Командование')
+      ) {
+
+        let ConfirmEmbed = new EmbedBuilder()
+        .setColor("#330101")
+        .setTitle(interaction.message.embeds[0].data.title)
+        .setAuthor({name: interaction.message.embeds[0].data.author.name, iconURL: interaction.message.embeds[0].data.author.icon_url })
+        .setFooter({ text:"Отклонено: "+interaction.member.nickname});
+        interaction.message.embeds[0].data.fields.forEach( field => {
+          ConfirmEmbed.addFields({name:field.name, value:field.value, inline:field.inline})
+        })
+        interaction.update({embeds:[ConfirmEmbed], components: []})       
+      }
+      else{
+        interaction.reply({content:"Вы не можете отклонять рапорта"})
+      }
+    break
     default:
       
     break;

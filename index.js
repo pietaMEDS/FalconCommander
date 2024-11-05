@@ -91,7 +91,6 @@ client.on('interactionCreate', async interaction => {
     break;
   case "invite":
     let nickname = interaction.member.nickname.split("|")
-    console.log(nickname[0].trim().split(" "));
     if (nickname[0].trim().split(" ").length != 3) {
       interaction.reply({content: `Измените своё имя по шаблону: [Звание] [Номер] [Позывной]
       Пример: SPC 0178 Neiro`, ephemeral:true })
@@ -152,7 +151,6 @@ client.on('interactionCreate', async interaction => {
         } else{
 
           let rank = await RankStabiliser(user[1])
-          console.log(rank);
 
           if (rank == '') {
             interaction.reply({content: "Le pizdec, Звания нормальное поставь", ephemeral:true})
@@ -174,7 +172,6 @@ client.on('interactionCreate', async interaction => {
               userExist = true
             }
           })
-          console.log(userExist);
           if (!userExist) {
             await usersData.users.push(userObj)
             usersData = JSON.stringify(usersData, null, 2);
@@ -232,8 +229,8 @@ client.on('interactionCreate', async interaction => {
         interaction.message.embeds[0].data.fields.forEach( field => {
           ConfirmEmbed.addFields({name:field.name == '' ? "\u200B" : field.name, value:field.value == '' ? "\u200B" : field.value, inline:field.inline})
         })
-        // interaction.update({embeds:[ConfirmEmbed], components: []})   
-        ConfirmCondition(interaction.message.embeds[0])  
+        interaction.update({embeds:[ConfirmEmbed], components: []})   
+        // ConfirmCondition(interaction.message.embeds[0])  
       }
       else{
         interaction.reply({content:"Вы не можете одобрять рапорта", ephemeral:true})
@@ -307,7 +304,6 @@ try {
   console.log('Обновление слеш комманд..');
 
   let commands = JSON.parse(await readFile("commands.json")).commands;
-  console.log(commands);
   await rest.put(Routes.applicationCommands(CLIENT_ID), { body: commands });
 
   console.log('Слеш команды обновлены!');

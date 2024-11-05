@@ -10,6 +10,5 @@ export default async (id) => {
             findedUser = user;
         }
     });
-    console.log(findedUser);
     return findedUser;
 }

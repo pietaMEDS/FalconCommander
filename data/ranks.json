@@ -376,7 +376,7 @@
         },
         {
             "name":"MAJ",
-            "subnames":["MAJOR"],
+            "subnames":["MAJOR", "MJR"],
             "priority":15,
             "condition":[
                 {

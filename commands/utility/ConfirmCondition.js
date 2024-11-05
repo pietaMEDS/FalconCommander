@@ -30,10 +30,20 @@ export default async (embed) => {
             });
         }
 
-        // embed.data.fields.forEach( element => {
+        let members;
+        embed.data.fields.forEach( field => {
+            if (field.name == "Участники") {
+                members = field.value
+            }
+        })
 
-        // })
-        // console.log(embed.data);
+        members = members.split(`
+`)
+        members.forEach(async member =>{
+            let memberObj = member.split("-")[1].trim();
+            memberObj = await FindUserByFullName(memberObj)
+        })
+
 
     } catch (error) {
         console.log(error);

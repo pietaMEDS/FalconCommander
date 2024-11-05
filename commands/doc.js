@@ -28,7 +28,29 @@ export default async (interaction) => {
             .setTitle("*Документ:*")
             .setAuthor({name: user.id+" "+user.name, iconURL: "https://cdn.discordapp.com/avatars/"+interaction.user.id+"/"+interaction.user.avatar })
             .addFields(
-                { name: "Подразделение:", value: user.guild },
+                { name: "Подразделение:", value: user.guild, inline: true},
+            );
+            if (interaction.member.roles.cache.some(role => role.name === 'Отряд воздушной поддержки')) {
+                replyEmbed.addFields(
+                    { name: "Отряд:", value: "Воздушная поддержка", inline: true},
+                );
+            }
+            else if(interaction.member.roles.cache.some(role => role.name === 'Десантный отряд')){
+                replyEmbed.addFields(
+                    { name: "Отряд:", value: "Десант", inline: true},
+                );
+            }
+            else if(interaction.member.roles.cache.some(role => role.name === 'Медицинский отряд')){
+                replyEmbed.addFields(
+                    { name: "Отряд:", value: "Медицинский отряд", inline: true},
+                );
+            }
+            else if(interaction.member.roles.cache.some(role => role.name === 'Дисциплинарный отряд - Каратель')){
+                replyEmbed.addFields(
+                    { name: "Отряд:", value: "Каратель", inline: true},
+                );
+            }
+            replyEmbed.addFields(
                 { name: 'Текущие звание', value: user.rank.name },
                 { name: "Критерии", value:conditions, inline: true  },
             );
@@ -36,7 +58,7 @@ export default async (interaction) => {
             if (results!="") {
                 replyEmbed.addFields({ name: 'Осталось', value: results, inline:true },)
             }
-            console.log("response embed:"+replyEmbed+" to "+interaction.member.nickname);
+            console.log("response embed:"+" docs "+" to "+interaction.member.nickname);
             if (
                 interaction.member.roles.cache.some(role => role.name === 'Заместитель командира')
                 ||

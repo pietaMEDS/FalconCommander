@@ -26,7 +26,7 @@ export default async (interaction) => {
         let replyEmbed = new EmbedBuilder()
         .setColor("#ffffff")
         .setTitle("*Рапорт о Боевом вылете*")
-        .setAuthor({name: interaction.member.nickname, iconURL: "https://cdn.discordapp.com/avatars/"+interaction.user.id+"/"+interaction.user.avatar })
+        .setAuthor({name: "Организатор: "+interaction.member.nickname, iconURL: "https://cdn.discordapp.com/avatars/"+interaction.user.id+"/"+interaction.user.avatar })
         .addFields(
             { name: "Операция: "+interaction.fields.fields.get("operation").value, value: interaction.fields.fields.get("desc").value },
             { name: '\u200B', value: '\u200B' },

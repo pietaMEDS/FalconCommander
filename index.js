@@ -25,6 +25,7 @@ import LectureSend from './commands/raportSend/lecture.js';
 import TrainigSend from './commands/raportSend/training.js';
 import DocSend from './commands/doc.js';
 import ConfirmCondition from './commands/utility/ConfirmCondition.js'
+import invite from './commands/raportSend/invite.js';
 
 async function RankStabiliser( rank ){
   let rankJson;
@@ -90,7 +91,8 @@ client.on('interactionCreate', async interaction => {
     break;
   case "invite":
     let nickname = interaction.member.nickname.split("|")
-    if (nickname[0].trim().split(" ") != 3) {
+    console.log(nickname[0].trim().split(" "));
+    if (nickname[0].trim().split(" ").length != 3) {
       interaction.reply({content: `Измените своё имя по шаблону: [Звание] [Номер] [Позывной]
       Пример: SPC 0178 Neiro`, ephemeral:true })
     }
@@ -100,9 +102,15 @@ client.on('interactionCreate', async interaction => {
         interaction.reply({content:`Невозможно считать ваше звание`, ephemeral:true})
         return;
       }
-      if (interaction.member.nickname.split(" ")) {
-        
+
+      let modalInvite = new ModalBuilder()
+      let modalInfoInvite = ModalMake(modalInvite, "invite", interaction);
+      if (modalInfoInvite == false) {
+        console.log("Создание модалки невозможно");
+        return;
       }
+      await interaction.showModal(modalInvite)
+      return
     }
 
 	case 'raport':
@@ -202,6 +210,9 @@ client.on('interactionCreate', async interaction => {
     case "Raport Builder:"+RAPORT_ID.lecture:
       LectureSend(interaction)
     break;
+    case 'invite':
+      invite(interaction)
+    break;
     case "confirm:Officer":
       if (
         interaction.member.roles.cache.some(role => role.name === 'Заместитель командира')
@@ -252,6 +263,29 @@ client.on('interactionCreate', async interaction => {
       }
       else{
         interaction.reply({content:"Вы не можете отклонять рапорта"})
+      }
+    break;
+    case "confirm:invite":
+      if (
+        interaction.member.roles.cache.some(role => role.name === 'Заместитель командира')
+        ||
+        interaction.member.roles.cache.some(role => role.name === 'Командир')
+        ||
+        interaction.member.roles.cache.some(role => role.name === 'Командование')
+      ) {
+
+        let ConfirmEmbed = new EmbedBuilder()
+        .setColor("#E55A36")
+        .setTitle(interaction.message.embeds[0].data.title)
+        .setAuthor({name: interaction.message.embeds[0].data.author.name, iconURL: interaction.message.embeds[0].data.author.icon_url })
+        .setFooter({ text:"Одобрено: "+interaction.member.nickname});
+        interaction.message.embeds[0].data.fields.forEach( field => {
+          ConfirmEmbed.addFields({name:field.name == '' ? "\u200B" : field.name, value:field.value == '' ? "\u200B" : field.value, inline:field.inline})
+        })
+        interaction.update({embeds:[ConfirmEmbed], components: []})    
+      }
+      else{
+        interaction.reply({content:"Вы не можете одобрять рапорта", ephemeral:true})
       }
     break
     default:

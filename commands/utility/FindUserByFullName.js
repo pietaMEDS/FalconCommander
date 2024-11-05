@@ -16,7 +16,6 @@ export default async (FullName) => {
     }
     users.users.forEach((user, key) => {
         if (user.id == userObj.id) {
-            console.log(user);
             findedUser = user;
             findedKey = key
         }

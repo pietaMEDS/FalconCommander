@@ -7,8 +7,6 @@ export default async (interaction) => {
     try {
         let user = await FindUserById(interaction.member.user.id)
 
-        console.log(user);
-
         let conditions = ""
         let results = ""
         user.rank.condition.forEach(condition => {
@@ -49,7 +47,7 @@ export default async (interaction) => {
                     .setCustomId("open:Officer")
                     .setLabel("Меню офицера")
                     .setStyle(ButtonStyle.Secondary);
-                interaction.reply({embeds: [replyEmbed], components: [officerButton]})
+                interaction.reply({embeds: [replyEmbed]})
             }
             else
             {

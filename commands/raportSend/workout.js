@@ -56,5 +56,4 @@ export default async (interaction, client) => {
     } catch (error) {
         console.log(error);
     }
-    
 }

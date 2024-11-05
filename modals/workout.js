@@ -188,6 +188,36 @@ export default (modal, id, interaction) => {
 		
 			modal.addComponents(firstRowTraining, secondRowTraining, thirdRowTraining)
 		break;
+
+		case "invite":
+			modal.setTitle("Заявка на встепление")
+			modal.setCustomId('invite')
+
+			
+			let InviteSteamId = new TextInputBuilder()
+				.setCustomId("SteamId")
+				.setLabel("SteamID игрового аккаунта")
+				.setStyle(TextInputStyle.Short)
+				.setRequired(true); 
+
+			let Invitetime = new TextInputBuilder()
+				.setCustomId("WorldHour")
+				.setLabel("Часовой пояс")
+				.setStyle(TextInputStyle.Short)
+				.setRequired(true);
+
+			let Invitedesc = new TextInputBuilder()
+				.setCustomId("desc")
+				.setLabel("Дополнительная информация")
+				.setStyle(TextInputStyle.Paragraph)
+				.setRequired(false);
+		
+			let firstRowInvite = new ActionRowBuilder().addComponents(InviteSteamId)
+			let secondRowInvite = new ActionRowBuilder().addComponents(Invitetime)
+			let thirdRowInvite = new ActionRowBuilder().addComponents(Invitedesc)
+		
+			modal.addComponents(firstRowInvite, secondRowInvite, thirdRowInvite)
+		break;
 		
 		default:
 			interaction.reply({content: "В данный момент недоступно", ephemeral:true})
@@ -197,6 +227,4 @@ export default (modal, id, interaction) => {
 			return false;
 		break;
 	}
-
-    
 }

@@ -10,7 +10,6 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
 import 'dotenv/config'
 
-
 const RAPORT_ID = JSON.parse(process.env.RAPORT_ID)
 const TOKEN = process.env.TOKEN
 const CLIENT_ID = process.env.CLIENT_ID;
@@ -26,6 +25,25 @@ import LectureSend from './commands/raportSend/lecture.js';
 import TrainigSend from './commands/raportSend/training.js';
 import DocSend from './commands/doc.js';
 import ConfirmCondition from './commands/utility/ConfirmCondition.js'
+
+async function RankStabiliser( rank ){
+  let rankJson;
+  let ranksData = JSON.parse( await readFile("./data/ranks.json"))
+  ranksData.ranks.forEach(rankElement => {
+      if (rankElement.name.toUpperCase() == rank.toUpperCase()) {
+      rankJson = rankElement
+    }
+    rankElement.subnames.forEach( ranksubname =>{
+      if (ranksubname.toUpperCase() == rank.toUpperCase()) {
+        rankJson = rankElement
+      }
+    })
+  })
+  if (!rankJson) {
+    return false
+  }
+  return rankJson
+}
 
 client.on('ready', () => {
   console.log(`Вход выполнен как ${client.user.tag}!`);
@@ -46,6 +64,9 @@ client.on('interactionCreate', async interaction => {
     }
   }
 
+  if (interaction.commandName) {
+    console.log("request "+interaction.commandName+" from "+interaction.member.nickname);
+  }
   let message;
 
   switch (interaction.commandName) {
@@ -68,11 +89,21 @@ client.on('interactionCreate', async interaction => {
       await interaction.reply("Slash reloaded!")
     break;
   case "invite":
-    if (interaction.member.nickname.split(" ") != 3) {
+    let nickname = interaction.member.nickname.split("|")
+    if (nickname[0].trim().split(" ") != 3) {
       interaction.reply({content: `Измените своё имя по шаблону: [Звание] [Номер] [Позывной]
       Пример: SPC 0178 Neiro`, ephemeral:true })
     }
-    console.log(interaction.member.nickname);
+    else{
+      let rank = RankStabiliser(nickname[0].trim().split(" ")[0])
+      if (!rank) {
+        interaction.reply({content:`Невозможно считать ваше звание`, ephemeral:true})
+        return;
+      }
+      if (interaction.member.nickname.split(" ")) {
+        
+      }
+    }
 
 	case 'raport':
 		let type;
@@ -109,22 +140,6 @@ client.on('interactionCreate', async interaction => {
         if (user.length != 4) {
           interaction.reply({content: "Неправильный формат имени", ephemeral:true})
         } else{
-
-          async function RankStabiliser( rank ){
-            let rankJson;
-            let ranksData = JSON.parse( await readFile("./data/ranks.json"))
-            ranksData.ranks.forEach(rankElement => {
-              if (rankElement.name.toUpperCase() == rank.toUpperCase()) {
-                rankJson = rankElement
-              }
-              rankElement.subnames.forEach( ranksubname =>{
-                if (ranksubname.toUpperCase() == rank.toUpperCase()) {
-                  rankJson = rankElement
-                }
-              })
-            })
-            return rankJson
-          }
 
           let rank = await RankStabiliser(user[1])
           console.log(rank);

@@ -16,18 +16,16 @@ export default async (embed) => {
     }
 
     let orgonizer = await FindUserByFullName(embed.data.author.name.split(":")[1])
-
-    console.log(orgonizer);
     
     let users = JSON.parse( await readFile("./data/users.json"))
 
-    console.log(users.users[orgonizer.key].condition)
-
-    if (false) {
+    if (raportCode) {
         
-        users.users[orgonizer.key].condition.forEach( element => {
+        users.users[orgonizer.key].condition.forEach( (element, key) => {
             if (element.name == raportName+":"+raportCode) {
-                console.log(element);
+                if (element.value > 0) {
+                    users.users[orgonizer.key].condition[key].value--
+                }
             }
         });
     }

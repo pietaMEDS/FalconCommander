@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'fs/promises';
 import FindUserById from './utility/FindUserById.js';
-import { EmbedBuilder } from 'discord.js';
+import { ButtonBuilder, ButtonStyle, EmbedBuilder } from 'discord.js';
 
 export default async (interaction) => {
 
@@ -37,9 +37,24 @@ export default async (interaction) => {
             if (results!="") {
                 replyEmbed.addFields({ name: 'Осталось', value: results, inline:true },)
             }
-
-        interaction.reply({embeds: [replyEmbed]})
-
+            console.log("response embed:"+replyEmbed+" to "+interaction.member.nickname);
+            if (
+                interaction.member.roles.cache.some(role => role.name === 'Заместитель командира')
+                ||
+                interaction.member.roles.cache.some(role => role.name === 'Командир')
+                ||
+                interaction.member.roles.cache.some(role => role.name === 'Командование')
+            ) {
+                let officerButton = new ButtonBuilder()
+                    .setCustomId("open:Officer")
+                    .setLabel("Меню офицера")
+                    .setStyle(ButtonStyle.Secondary);
+                interaction.reply({embeds: [replyEmbed], components: [officerButton]})
+            }
+            else
+            {
+                interaction.reply({embeds: [replyEmbed]})
+            }
     } catch (error) {
             console.log(error);
     }

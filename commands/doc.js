@@ -9,6 +9,7 @@ export default async (interaction) => {
 
         let conditions = ""
         let results = ""
+        
         user.rank.condition.forEach(condition => {
             if (condition.value > 0) {
                 conditions+=condition.desc+`

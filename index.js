@@ -11,8 +11,7 @@ import { JWT } from 'google-auth-library';
 import 'dotenv/config'
 
 
-const RAPORT_ID =  JSON.parse(process.env.RAPORT_ID)
-const creds = process.env.GOOGLE_CRED
+const RAPORT_ID = JSON.parse(process.env.RAPORT_ID)
 const TOKEN = process.env.TOKEN
 const CLIENT_ID = process.env.CLIENT_ID;
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
@@ -26,6 +25,7 @@ import EventSend from './commands/raportSend/event.js';
 import LectureSend from './commands/raportSend/lecture.js';
 import TrainigSend from './commands/raportSend/training.js';
 import DocSend from './commands/doc.js';
+import ConfirmCondition from './commands/utility/ConfirmCondition.js'
 
 client.on('ready', () => {
   console.log(`Вход выполнен как ${client.user.tag}!`);
@@ -38,12 +38,18 @@ client.on('interactionCreate', async interaction => {
     return;
   }
 
+  if (process.env.DEV) {
+    if (interaction.member.user.id != 428170232029511680) {
+      await interaction.reply({content:"Идут технические работы по настройке обновления, пожалуйста попробуйте в следующий раз", ephemeral:true})
+      console.log("push from "+interaction.member.nickname);
+      return;
+    }
+  }
+
   let message;
 
   switch (interaction.commandName) {
     case "docs":
-
-    let DocModal = new ModalBuilder()
       DocSend(interaction);
     break;
     case 'reload':
@@ -64,7 +70,7 @@ client.on('interactionCreate', async interaction => {
   case "invite":
     if (interaction.member.nickname.split(" ") != 3) {
       interaction.reply({content: `Измените своё имя по шаблону: [Звание] [Номер] [Позывной]
-      Пример: SPC 0178 Neiro` })
+      Пример: SPC 0178 Neiro`, ephemeral:true })
     }
     console.log(interaction.member.nickname);
 
@@ -133,6 +139,7 @@ client.on('interactionCreate', async interaction => {
             "guild": user[0].toLowerCase(),
             "rank": rank,
             "id": user[2],
+            "user_id": interaction.member.user.id
           }
           let usersData = JSON.parse( await readFile("./data/users.json"))
           let userExist = false;
@@ -197,7 +204,8 @@ client.on('interactionCreate', async interaction => {
         interaction.message.embeds[0].data.fields.forEach( field => {
           ConfirmEmbed.addFields({name:field.name == '' ? "\u200B" : field.name, value:field.value == '' ? "\u200B" : field.value, inline:field.inline})
         })
-        interaction.update({embeds:[ConfirmEmbed], components: []})       
+        // interaction.update({embeds:[ConfirmEmbed], components: []})   
+        ConfirmCondition(interaction.message.embeds[0])  
       }
       else{
         interaction.reply({content:"Вы не можете одобрять рапорта", ephemeral:true})

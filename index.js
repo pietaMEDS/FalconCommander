@@ -140,10 +140,12 @@ client.on('interactionCreate', async interaction => {
     break;
     case 'auth':
       let user;
+      let userid;
       interaction.options._hoistedOptions.forEach(async element => {
         if (element.name == 'user') {
-          user = element.member.nickname.split("|")
-          user = user[0].trim().split(" ")
+          userid = element.member.user.id;
+          user = element.member.nickname.split("|");
+          user = user[0].trim().split(" ");
         }
         if (user.length != 4) {
           interaction.reply({content: "Неправильный формат имени", ephemeral:true})
@@ -162,7 +164,7 @@ client.on('interactionCreate', async interaction => {
             "guild": user[0].toLowerCase(),
             "rank": rank,
             "id": user[2],
-            "user_id": interaction.member.user.id
+            "user_id": userid
           }
           let usersData = JSON.parse( await readFile("./data/users.json"))
           let userExist = false;

@@ -30,24 +30,24 @@ export default async (interaction) => {
             .addFields(
                 { name: "Подразделение:", value: user.guild, inline: true},
             );
-            if (interaction.member.roles.cache.some(role => role.name === 'Отряд воздушной поддержки')) {
+            if (interaction.member.roles.cache.some(role => role.name === 'Отряд воздушной поддержки - Могильщик')) {
                 replyEmbed.addFields(
-                    { name: "Отряд:", value: "Воздушная поддержка", inline: true},
+                    { name: "Отряд:", value: "Могильщик", inline: true},
                 );
             }
-            else if(interaction.member.roles.cache.some(role => role.name === 'Десантный отряд')){
+            else if(interaction.member.roles.cache.some(role => role.name === 'Десантный отряд - Кинжал')){
                 replyEmbed.addFields(
-                    { name: "Отряд:", value: "Десант", inline: true},
+                    { name: "Отряд:", value: "Кинжал", inline: true},
                 );
             }
-            else if(interaction.member.roles.cache.some(role => role.name === 'Медицинский отряд')){
+            else if(interaction.member.roles.cache.some(role => role.name === 'Медицинский отряд - Панацея')){
                 replyEmbed.addFields(
-                    { name: "Отряд:", value: "Медицинский отряд", inline: true},
+                    { name: "Отряд:", value: "Панацея", inline: true},
                 );
             }
-            else if(interaction.member.roles.cache.some(role => role.name === 'Дисциплинарный отряд - Каратель')){
+            else if(interaction.member.roles.cache.some(role => role.name === 'Дисциплинарный отряд - Рубеж')){
                 replyEmbed.addFields(
-                    { name: "Отряд:", value: "Каратель", inline: true},
+                    { name: "Отряд:", value: "Рубеж", inline: true},
                 );
             }
             replyEmbed.addFields(

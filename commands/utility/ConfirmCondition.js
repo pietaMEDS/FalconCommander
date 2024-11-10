@@ -1,4 +1,3 @@
-import post from "../raportSend/post.js";
 import FindUserByFullName from "./FindUserByFullName.js";
 import { readFile, writeFile } from 'fs/promises';
 
@@ -35,7 +34,8 @@ export default async (embed, interaction) => {
             break;
 
             case "*Рапорт о проведении Иного типа занятий*":
-                interaction.reply({ content:"Критерии данного типа не могут быть расспределены", ephemeral: true})
+                // interaction.reply({ content:"Критерии данного типа не могут быть расспределены", ephemeral: true})
+                console.log("Критерии данного типа не могут быть расспределены");
                 return
             break;
 

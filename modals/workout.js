@@ -39,6 +39,37 @@ export default (modal, id, interaction) => {
 			modal.addComponents(RowworkoutName, Rowdescription, Rowsoldiers)
 
 			break;
+
+			case RAPORT_ID.workoutUnited:
+		
+			modal.setTitle("Рапорт о проведении совместной тренировки")
+			modal.setCustomId('Raport Builder:'+id)
+		
+			let UniworkoutName = new TextInputBuilder()
+				.setCustomId("workoutName")
+				.setLabel("Название проводимой совместной тренировки")
+				.setStyle(TextInputStyle.Short)
+				.setRequired(true)
+		
+			soldiers = new TextInputBuilder()
+				.setCustomId("soldiers")
+				.setLabel("Группа.")
+				.setStyle(TextInputStyle.Paragraph)
+				.setRequired(true)
+		
+			description = new TextInputBuilder()
+				.setCustomId("desc")
+				.setLabel("Информация о тренировке")
+				.setStyle(TextInputStyle.Paragraph)
+				.setRequired(true)
+		
+				let RowUniworkoutName = new ActionRowBuilder().addComponents(UniworkoutName);
+				let RowUnisoldiers = new ActionRowBuilder().addComponents(soldiers);
+				let RowUnidescription = new ActionRowBuilder().addComponents(description);
+		
+			modal.addComponents(RowUniworkoutName, RowUnisoldiers, RowUnidescription)
+
+			break;
 		case RAPORT_ID.simulation:
 			modal.setTitle("Рапорт о проведении симуляции")
 			modal.setCustomId('Raport Builder:'+id)
@@ -217,6 +248,36 @@ export default (modal, id, interaction) => {
 			let thirdRowInvite = new ActionRowBuilder().addComponents(Invitedesc)
 		
 			modal.addComponents(firstRowInvite, secondRowInvite, thirdRowInvite)
+		break;
+
+		case RAPORT_ID.other:
+			modal.setTitle("Прочие")
+			modal.setCustomId('Raport Builder:'+id)
+
+			
+			let RaportTheme = new TextInputBuilder()
+				.setCustomId("Theme")
+				.setLabel("Тема рапорта")
+				.setStyle(TextInputStyle.Short)
+				.setRequired(true); 
+
+			let RaportBody = new TextInputBuilder()
+				.setCustomId("desc")
+				.setLabel("Описание")
+				.setStyle(TextInputStyle.Paragraph)
+				.setRequired(true);
+
+				soldiers = new TextInputBuilder()
+				.setCustomId("soldiers")
+				.setLabel("Группа")
+				.setStyle(TextInputStyle.Paragraph)
+				.setRequired(true);
+		
+			let firstRowOther = new ActionRowBuilder().addComponents(RaportTheme)
+			let secondRowOther = new ActionRowBuilder().addComponents(RaportBody)
+			let thirdRowOther = new ActionRowBuilder().addComponents(soldiers)
+		
+			modal.addComponents(firstRowOther, secondRowOther, thirdRowOther)
 		break;
 		
 		default:

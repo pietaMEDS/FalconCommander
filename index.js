@@ -18,6 +18,8 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 import { exec } from 'child_process';
 import ModalMake from './modals/workout.js';
 import workoutSend from './commands/raportSend/workout.js';
+import UnitedworkoutSend from './commands/raportSend/unitedWorkout.js';
+import OtherSend from './commands/raportSend/other.js';
 import SimulationSend from './commands/raportSend/simulation.js';
 import PostSend from './commands/raportSend/post.js';
 import EventSend from './commands/raportSend/event.js';
@@ -26,6 +28,7 @@ import TrainigSend from './commands/raportSend/training.js';
 import DocSend from './commands/doc.js';
 import ConfirmCondition from './commands/utility/ConfirmCondition.js'
 import invite from './commands/raportSend/invite.js';
+import unitedWorkout from './commands/raportSend/unitedWorkout.js';
 
 async function RankStabiliser( rank ){
   let rankJson;
@@ -191,6 +194,9 @@ client.on('interactionCreate', async interaction => {
 		case "Raport Builder:"+RAPORT_ID.workout:
       workoutSend(interaction)
 		break;
+    case "Raport Builder:"+RAPORT_ID.workoutUnited:
+      UnitedworkoutSend(interaction)
+		break;
     case "Raport Builder:"+RAPORT_ID.simulation:
       SimulationSend(interaction)
     break;
@@ -208,6 +214,9 @@ client.on('interactionCreate', async interaction => {
     break;
     case "Raport Builder:"+RAPORT_ID.lecture:
       LectureSend(interaction)
+    break;
+    case "Raport Builder:"+RAPORT_ID.other:
+      OtherSend(interaction)
     break;
     case 'invite':
       invite(interaction)
@@ -230,7 +239,7 @@ client.on('interactionCreate', async interaction => {
           ConfirmEmbed.addFields({name:field.name == '' ? "\u200B" : field.name, value:field.value == '' ? "\u200B" : field.value, inline:field.inline})
         })
         interaction.update({embeds:[ConfirmEmbed], components: []})   
-        // ConfirmCondition(interaction.message.embeds[0])  
+        ConfirmCondition(interaction.message.embeds[0], interaction)  
       }
       else{
         interaction.reply({content:"Вы не можете одобрять рапорта", ephemeral:true})

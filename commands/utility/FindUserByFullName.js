@@ -20,6 +20,10 @@ export default async (FullName) => {
             findedKey = key
         }
     });
-    findedUser.key = findedKey
-    return findedUser;
+    if (findedUser) {
+        findedUser.key = findedKey
+        return findedUser;
+    }
+
+    return false;
 }

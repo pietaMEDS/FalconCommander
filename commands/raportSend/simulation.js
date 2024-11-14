@@ -21,6 +21,14 @@ export default async (interaction) => {
         interaction.reply({content:"Напоминаю! рапорта пишутся старшим в подразделении на момент события!", ephemeral:true})
         return;
     }
+
+    console.log(`Запрос на отправку формы:
+        ID: `+interaction.customId+`
+        Initiator: `+interaction.member.nickname+`
+        Fields:
+        [
+        `+interaction.fields.fields+`
+        ]`);
     
     try{
         let replyEmbed = new EmbedBuilder()

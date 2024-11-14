@@ -10,5 +10,9 @@ export default async (id) => {
             findedUser = user;
         }
     });
-    return findedUser;
+    if (findedUser) {
+        return findedUser;
+    }
+
+    return false
 }

@@ -5,7 +5,15 @@ import { ButtonBuilder, ButtonStyle, EmbedBuilder } from 'discord.js';
 export default async (interaction) => {
 
     try {
+
+        console.log("Document creating..");
+
         let user = await FindUserById(interaction.member.user.id)
+
+        if (user == false) {
+            console.log("Document creating canceled, user not found");
+            return;
+        }
 
         let conditions = ""
         let results = ""
@@ -30,12 +38,13 @@ export default async (interaction) => {
             .addFields(
                 { name: "Подразделение:", value: user.guild, inline: true},
             );
-            if (interaction.member.roles.cache.some(role => role.name === 'Отряд воздушной поддержки - Могильщик')) {
-                replyEmbed.addFields(
-                    { name: "Отряд:", value: "Могильщик", inline: true},
-                );
-            }
-            else if(interaction.member.roles.cache.some(role => role.name === 'Десантный отряд - Кинжал')){
+            // if (interaction.member.roles.cache.some(role => role.name === 'Отряд воздушной поддержки - Могильщик')) {
+            //     replyEmbed.addFields(
+            //         { name: "Отряд:", value: "Могильщик", inline: true},
+            //     );
+            // }
+            // else 
+            if(interaction.member.roles.cache.some(role => role.name === 'Десантный отряд - Кинжал')){
                 replyEmbed.addFields(
                     { name: "Отряд:", value: "Кинжал", inline: true},
                 );
@@ -58,7 +67,7 @@ export default async (interaction) => {
             if (results!="") {
                 replyEmbed.addFields({ name: 'Осталось', value: results, inline:true },)
             }
-            console.log("response embed:"+" docs "+" to "+interaction.member.nickname);
+            console.log("Document created, response to " + interaction.member.nickname);
             if (
                 interaction.member.roles.cache.some(role => role.name === 'Заместитель командира')
                 ||

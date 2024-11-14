@@ -39,6 +39,14 @@ export default async (interaction) => {
         day = date.getDate()
     }
     let month = date.getMonth()+1    
+
+    console.log(`Запрос на отправку формы:
+        ID: `+interaction.customId+`
+        Initiator: `+interaction.member.nickname+`
+        Fields:
+        [
+        `+interaction.fields.fields+`
+        ]`);
     
     try{
         let replyEmbed = new EmbedBuilder()

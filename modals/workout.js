@@ -36,8 +36,7 @@ export default (modal, id, interaction) => {
 				let Rowsoldiers = new ActionRowBuilder().addComponents(soldiers);
 				let Rowdescription = new ActionRowBuilder().addComponents(description);
 		
-			modal.addComponents(RowworkoutName, Rowdescription, Rowsoldiers)
-
+			modal.addComponents(RowworkoutName, Rowdescription, Rowsoldiers)	
 			break;
 
 			case RAPORT_ID.workoutUnited:
@@ -278,6 +277,42 @@ export default (modal, id, interaction) => {
 			let thirdRowOther = new ActionRowBuilder().addComponents(soldiers)
 		
 			modal.addComponents(firstRowOther, secondRowOther, thirdRowOther)
+		break;
+
+		case "rankUpClass":
+
+			if (rankUp.type == "query") {
+				modal.setTitle("Очередное повышение");
+				modal.setCustomId("RankUp:query");
+			}
+			else if(rankUp.type == "force"){
+				modal.setTitle("Внеочередное повышение");
+        		modal.setCustomId("RankUp:force");
+			}
+			else{
+				interaction.reply({
+					content: "Произошла внутреняя ошибка, Неизвестный случай повышения",
+					ephemeral: true,
+				});
+				console.error("Неизвестный случай повышения");
+				return;
+			}
+
+			soldiers = new TextInputBuilder()
+				.setCustomId("soldiers")
+				.setLabel("Боец")
+				.setStyle(TextInputStyle.Short)
+				.setRequired(true);
+
+			let RaportReason = new TextInputBuilder()
+				.setCustomId("desc")
+				.setLabel("Своя причина если имеется")
+				.setStyle(TextInputStyle.Paragraph)
+				.setRequired(false);
+
+			let firstRowRankUp = new ActionRowBuilder().addComponents(soldiers);
+			let secondRowRankUp = new ActionRowBuilder().addComponents(RaportReason);
+			modal.addComponents(firstRowRankUp, secondRowRankUp);
 		break;
 		
 		default:

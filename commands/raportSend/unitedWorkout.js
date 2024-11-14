@@ -41,6 +41,14 @@ export default async (interaction, client) => {
         return;
     }
 
+    console.log(`Запрос на отправку формы:
+        ID: `+interaction.customId+`
+        Initiator: `+interaction.member.nickname+`
+        Fields:
+        [
+        `+interaction.fields.fields+`
+        ]`);
+
     try {
         let replyEmbed = new EmbedBuilder()
         .setColor("#ffffff")

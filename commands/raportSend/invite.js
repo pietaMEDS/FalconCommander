@@ -14,12 +14,11 @@ export default async (interaction) => {
     let month = date.getMonth()+1
 
     console.log(`Запрос на отправку формы:
-        ID: `+interaction.customId+`
-        Initiator: `+interaction.member.nickname+`
+        ID: `+interaction.customId+`,
+        Initiator: `+interaction.member.nickname+`,
         Fields:
-        [
-        `+interaction.fields.fields+`
-        ]`);
+        `+JSON.stringify(interaction.fields.fields, null, 2)+`
+        `);
 
     try{
         let replyEmbed = new EmbedBuilder()

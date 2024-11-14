@@ -40,9 +40,8 @@ export default async (interaction, client) => {
         ID: `+interaction.customId+`
         Initiator: `+interaction.member.nickname+`
         Fields:
-        [
-        `+interaction.fields.fields+`
-        ]`);
+        `+JSON.stringify(interaction.fields.fields, null, 2)+`
+        `);
 
     try {
         let replyEmbed = new EmbedBuilder()

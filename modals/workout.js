@@ -1,6 +1,7 @@
 import { ActionRowBuilder, Component, ModalBuilder, REST, Routes, TextInputBuilder, TextInputStyle  } from 'discord.js';
 import { env } from 'process';
 import 'dotenv/config'
+import { SelectTypeSend } from '../commands/utility/RankUpProcedure.js';
 const RAPORT_ID =  JSON.parse(process.env.RAPORT_ID)
 
 export default (modal, id, interaction) => {
@@ -277,6 +278,10 @@ export default (modal, id, interaction) => {
 			let thirdRowOther = new ActionRowBuilder().addComponents(soldiers)
 		
 			modal.addComponents(firstRowOther, secondRowOther, thirdRowOther)
+		break;
+
+		case RAPORT_ID.rankUp:
+		SelectTypeSend(interaction)
 		break;
 
 		case "rankUpClass":

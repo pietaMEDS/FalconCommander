@@ -1,3 +1,5 @@
+import { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } from "discord.js";
+
 export async function SelectTypeSend (interaction) {
   if ( true
     // interaction.member.roles.cache.some(
@@ -22,15 +24,20 @@ export async function SelectTypeSend (interaction) {
       let row = new ActionRowBuilder()
         .addComponents(selecter);
 
+      modalInfo = false
+
     await interaction.reply({
       content: "Выберите тип повышения",
       component: [row],
     });
+
+    return;
   } else {
     await interaction.reply({
         content: "Вы не можете повышать участников",
         ephemeral: true,
     })
+    return;
   }
 };
 

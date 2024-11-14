@@ -28,6 +28,7 @@ import TrainigSend from './commands/raportSend/training.js';
 import DocSend from './commands/doc.js';
 import ConfirmCondition from './commands/utility/ConfirmCondition.js'
 import invite from './commands/raportSend/invite.js';
+import { SelectTypeSend } from './commands/utility/RankUpProcedure.js';
 
 async function RankStabiliser( rank ){
 
@@ -140,6 +141,8 @@ client.on('interactionCreate', async interaction => {
 			.setTitle("Создать рапорт");
 
     let modalInfo = ModalMake(modal, type.value, interaction);
+
+    
 
     if (modalInfo == false) {
       console.log("Создание модалки невозможно");
